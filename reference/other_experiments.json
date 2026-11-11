@@ -1,0 +1,148 @@
+{
+ "description": "Earlier usual-domain experiments (SMP2020-EWECT general Weibo, test split, 5,000 rows). Fractions. Only the numbers are shipped; the final recipe does not use these models.",
+ "experiments": {
+  "zero_shot_digit_labels": {
+   "description": "Qwen3.5-4B without fine-tuning; the prompt asks for a digit 0-5; one forward pass, softmax over the six digit tokens, thinking off.",
+   "test": {
+    "accuracy": 0.7004,
+    "macro_f1": 0.5852648217109282,
+    "per_class_f1": {
+     "neutral": 0.8087248322147651,
+     "angry": 0.7979051139864448,
+     "happy": 0.6963470319634704,
+     "sad": 0.5847133757961783,
+     "fear": 0.5395894428152492,
+     "surprise": 0.08430913348946135
+    }
+   }
+  },
+  "zero_shot_word_labels": {
+   "description": "Qwen3.5-4B without fine-tuning; the same prompt and six answer words as the final models; one forward pass, thinking off.",
+   "test": {
+    "accuracy": 0.7558,
+    "macro_f1": 0.7135907281616959,
+    "per_class_f1": {
+     "neutral": 0.8082799408575653,
+     "angry": 0.8252290345313601,
+     "happy": 0.7588075880758808,
+     "sad": 0.6841823056300268,
+     "fear": 0.6544502617801047,
+     "surprise": 0.5505952380952381
+    }
+   }
+  },
+  "native_thinking_zero_shot": {
+   "description": "Qwen3.5-4B without fine-tuning, native thinking mode (sampling with temperature 1.0, top-p 0.95, top-k 20, presence penalty 1.5; thinking budget 4,096 tokens with up to 3 attempts, the 100 rows still unresolved re-run with a budget of 8,192), digit answer (0-5) chosen greedily after thinking; BF16 weights served with llama.cpp.",
+   "test": {
+    "accuracy": 0.7694,
+    "macro_f1": 0.722433129816757
+   }
+  },
+  "digit_labels_lora_0p8b": {
+   "description": "Direct LoRA fine-tuning of Qwen3.5-0.8B with digit answers (0-5) instead of answer words; otherwise the A recipe (r 8, alpha 16, AdamW lr 2e-4, effective batch 16, up to 3 epochs, epoch chosen on dev Macro-F1), seed 42.",
+   "test": {
+    "accuracy": 0.7708,
+    "macro_f1": 0.7413099627624491,
+    "per_class_f1": {
+     "neutral": 0.8288288288288288,
+     "angry": 0.8268482490272373,
+     "happy": 0.7858093126385809,
+     "sad": 0.6604973973395026,
+     "fear": 0.6962305986696231,
+     "surprise": 0.649645390070922
+    }
+   },
+   "settings": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "seed": 42,
+    "rank": 8,
+    "lora_alpha": 16,
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "answer_format": "digits 0-5",
+    "label_token_ids": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20
+    ],
+    "best_epoch": 1
+   }
+  },
+  "digit_labels_lora_2b": {
+   "description": "Direct LoRA fine-tuning of Qwen3.5-2B with digit answers (0-5) instead of answer words; otherwise the A recipe (r 8, alpha 16, AdamW lr 2e-4, effective batch 16, up to 3 epochs, epoch chosen on dev Macro-F1), seed 42.",
+   "test": {
+    "accuracy": 0.7882,
+    "macro_f1": 0.7606604574452592,
+    "per_class_f1": {
+     "neutral": 0.8459869848156182,
+     "angry": 0.8380445626870635,
+     "happy": 0.8123844731977818,
+     "sad": 0.6862302483069977,
+     "fear": 0.7198177676537585,
+     "surprise": 0.661498708010336
+    }
+   },
+   "settings": {
+    "base_model": "Qwen/Qwen3.5-2B",
+    "seed": 42,
+    "rank": 8,
+    "lora_alpha": 16,
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "answer_format": "digits 0-5",
+    "label_token_ids": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20
+    ],
+    "best_epoch": 1
+   }
+  },
+  "digit_labels_lora_4b": {
+   "description": "Direct LoRA fine-tuning of Qwen3.5-4B with digit answers (0-5) instead of answer words; otherwise the A recipe (r 8, alpha 16, AdamW lr 2e-4, effective batch 16, up to 3 epochs, epoch chosen on dev Macro-F1), seed 42.",
+   "test": {
+    "accuracy": 0.7938,
+    "macro_f1": 0.7618268037690163,
+    "per_class_f1": {
+     "neutral": 0.8353174603174603,
+     "angry": 0.8463524854744997,
+     "happy": 0.8167592125189298,
+     "sad": 0.7020785219399538,
+     "fear": 0.7056179775280899,
+     "surprise": 0.6648351648351648
+    }
+   },
+   "settings": {
+    "base_model": "Qwen/Qwen3.5-4B",
+    "seed": 42,
+    "rank": 8,
+    "lora_alpha": 16,
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "answer_format": "digits 0-5",
+    "label_token_ids": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20
+    ],
+    "best_epoch": 2
+   }
+  },
+  "direct_lora_word_labels_4b": {
+   "description": "For comparison: the A recipe with answer words (A_s42 of this package).",
+   "test": {
+    "accuracy": 0.7962,
+    "macro_f1": 0.7696901670518579
+   }
+  }
+ }
+}

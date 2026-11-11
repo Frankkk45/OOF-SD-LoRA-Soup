@@ -1,0 +1,33 @@
+{
+  "run_name": "wrime_Afold1",
+  "mode": "post_cot",
+  "use_rationales": false,
+  "label_format": "word",
+  "initial_dev_eval": false,
+  "train_cleaning": "folds/wrime_fold1_spec.json",
+  "data_dir": "data/wrime",
+  "instruction_override": "判断下面文本的主要情绪，只输出一个情绪类别。类别：中性、愤怒、喜悦、悲伤、恐惧、惊讶、厌恶、期待、信任。",
+  "text_prefix": "文本：\n",
+  "answer_words": [
+    "中性",
+    "愤怒",
+    "喜悦",
+    "悲伤",
+    "恐惧",
+    "惊讶",
+    "厌恶",
+    "期待",
+    "信任"
+  ],
+  "label_names": [
+    "neutral",
+    "angry",
+    "happy",
+    "sad",
+    "fear",
+    "surprise",
+    "disgust",
+    "anticipation",
+    "trust"
+  ]
+}
