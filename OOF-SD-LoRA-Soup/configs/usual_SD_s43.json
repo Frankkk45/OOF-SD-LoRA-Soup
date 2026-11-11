@@ -1,0 +1,10 @@
+{
+  "mode": "post_cot",
+  "use_rationales": false,
+  "label_format": "word",
+  "initial_dev_eval": false,
+  "run_name": "usual_SD_s43",
+  "label_targets_file": "targets/usual_targets_sd.json",
+  "seed": 43,
+  "data_dir": "data/usual"
+}

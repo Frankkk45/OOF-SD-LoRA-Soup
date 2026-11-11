@@ -1,0 +1,220 @@
+{
+  "description": "Previously published test results on the datasets of this package, as reported by their authors. None of these systems was re-run for this work. Values are percentages; null means the source does not report the metric.",
+  "scale": "percent",
+  "metric_definitions": {
+    "accuracy": "share of test rows whose predicted class equals the gold class",
+    "macro_f1": "unweighted mean of the per-class F1 scores over all classes, neutral included (the SMP2020-EWECT ranking metric); not the harmonic mean of macro precision and macro recall",
+    "weighted_f1": "mean of the per-class F1 scores weighted by the number of gold rows of each class",
+    "micro_f1": "F1 from the pooled true positives, false positives and false negatives of all classes",
+    "official_two_domain_score": "SMP2020-EWECT final score: (usual Macro-F1 + virus Macro-F1) / 2, no size weighting"
+  },
+  "datasets": {
+    "usual": {
+      "title": "SMP2020-EWECT general Weibo (Chinese, 6 classes)",
+      "protocol": "official SMP2020-EWECT usual splits: 27,766 / 2,000 / 5,000 rows (2 empty training texts removed), 6 classes, single label",
+      "results": [
+        {
+          "id": "smp2020_winner",
+          "system": "SMP2020-EWECT 2020 winner (BERT Forest ensemble)",
+          "authors": "Yudong Li, Zhe Zhao, Xuefeng Yang, et al. (team Tencent Oteam)",
+          "year": 2020,
+          "venue": "SMP2020-EWECT evaluation, technical report of the winning team",
+          "source_type": "competition technical report and official leaderboard",
+          "url": "https://github.com/smp2020ewect/smp2020ewect.github.io/blob/master/reports/Tencent-SMP2020-EWECT%E8%AF%84%E6%B5%8B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A.pdf",
+          "extra_urls": {
+            "evaluation": "https://smp2020ewect.github.io/",
+            "leaderboard_screenshot": "https://github.com/thinkingmanyangyang/smp-ewect-code"
+          },
+          "accuracy": 80.76,
+          "macro_f1": 78.56,
+          "where": "Macro-F1: abstract of the report (final test results). Accuracy: final leaderboard (the original page is offline; a screenshot kept by another participating team is in the image folder of the leaderboard_screenshot repository). Accuracy was shown but not used for ranking.",
+          "protocol_note": "Official test set scored blind in 2020. Several hundred base models (BERT-family and other networks) with continued pre-training on extra Weibo corpora, adversarial training, cross-domain auxiliary training and distillation whose transfer set included the unlabelled test texts; stacked with LightGBM, linear regression and multi-fold averaging. The labelled test file used in this work has the same size as the scored set, but no official statement confirms that the rows are identical.",
+          "short_note": "ensemble of several hundred models; extra training data"
+        },
+        {
+          "id": "chinese_mentalbert",
+          "system": "Chinese MentalBERT (guided masking)",
+          "authors": "W. Zhai, H. Qi, Q. Zhao, et al.",
+          "year": 2024,
+          "venue": "Findings of ACL 2024, pp. 10574-10585",
+          "source_type": "peer-reviewed conference paper",
+          "url": "https://aclanthology.org/2024.findings-acl.629/",
+          "extra_urls": {
+            "doi": "https://doi.org/10.18653/v1/2024.findings-acl.629",
+            "code": "https://github.com/zwzzzQAQ/Chinese-MentalBERT"
+          },
+          "accuracy": null,
+          "macro_f1": 76.74,
+          "where": "Tables 2 and 3",
+          "protocol_note": "Original SMP2020-EWECT splits, model selection on dev. Chinese-BERT-wwm-ext with domain-adaptive pre-training on mental-health social-media text and lexicon-guided masking; stronger text cleaning than in this work.",
+          "short_note": "single encoder with domain-adaptive pre-training"
+        }
+      ]
+    },
+    "virus": {
+      "title": "SMP2020-EWECT COVID-19 Weibo (Chinese, 6 classes)",
+      "protocol": "official SMP2020-EWECT virus splits: 8,606 / 2,000 / 3,000 rows, 6 classes, single label",
+      "results": [
+        {
+          "id": "smp2020_winner",
+          "system": "SMP2020-EWECT 2020 winner (BERT Forest ensemble)",
+          "authors": "Yudong Li, Zhe Zhao, Xuefeng Yang, et al. (team Tencent Oteam)",
+          "year": 2020,
+          "venue": "SMP2020-EWECT evaluation, technical report of the winning team",
+          "source_type": "competition technical report and official leaderboard",
+          "url": "https://github.com/smp2020ewect/smp2020ewect.github.io/blob/master/reports/Tencent-SMP2020-EWECT%E8%AF%84%E6%B5%8B%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A.pdf",
+          "extra_urls": {
+            "evaluation": "https://smp2020ewect.github.io/",
+            "leaderboard_screenshot": "https://github.com/thinkingmanyangyang/smp-ewect-code"
+          },
+          "accuracy": 82.47,
+          "macro_f1": 70.78,
+          "where": "Macro-F1: abstract of the report (final test results). Accuracy: final leaderboard screenshot (not a ranking metric).",
+          "protocol_note": "Same system and caveats as for the general domain: large ensemble, extra corpora, cross-domain auxiliary training, distillation over unlabelled test texts; test-file identity not officially confirmed.",
+          "short_note": "ensemble of several hundred models; extra training data"
+        },
+        {
+          "id": "diffusioncls",
+          "system": "DiffusionCLS (G/E configuration, Chinese RoBERTa-wwm-ext classifier)",
+          "authors": "Z. Chen, et al.",
+          "year": 2024,
+          "venue": "EMNLP 2024 (main conference)",
+          "source_type": "peer-reviewed conference paper",
+          "url": "https://aclanthology.org/2024.emnlp-main.109/",
+          "extra_urls": {
+            "doi": "https://doi.org/10.18653/v1/2024.emnlp-main.109",
+            "code": "https://github.com/JohnnyChanV/DiffusionCLS"
+          },
+          "accuracy": 80.23,
+          "macro_f1": 67.98,
+          "where": "Tables 2 and 8",
+          "protocol_note": "8,606 training and 3,000 test rows. Label-aware diffusion language model generates 4 augmented samples per training sample; model-selection details on dev are not fully described. The paper's balanced B/D configuration reaches 66.47.",
+          "short_note": "diffusion-based data augmentation"
+        },
+        {
+          "id": "chinese_mentalbert",
+          "system": "Chinese MentalBERT (guided masking)",
+          "authors": "W. Zhai, H. Qi, Q. Zhao, et al.",
+          "year": 2024,
+          "venue": "Findings of ACL 2024, pp. 10574-10585",
+          "source_type": "peer-reviewed conference paper",
+          "url": "https://aclanthology.org/2024.findings-acl.629/",
+          "extra_urls": {
+            "doi": "https://doi.org/10.18653/v1/2024.findings-acl.629",
+            "code": "https://github.com/zwzzzQAQ/Chinese-MentalBERT"
+          },
+          "accuracy": null,
+          "macro_f1": 67.77,
+          "where": "Tables 2 and 3",
+          "protocol_note": "Original splits, model selection on dev, domain-adaptive pre-training; stronger text cleaning than in this work.",
+          "short_note": "single encoder with domain-adaptive pre-training"
+        },
+        {
+          "id": "bert_kecd_v2",
+          "system": "BERT-KECD-v2 (emotion category descriptions)",
+          "authors": "X. Guo, et al.",
+          "year": 2021,
+          "venue": "CCL 2021, pp. 916-927",
+          "source_type": "peer-reviewed conference paper",
+          "url": "https://aclanthology.org/2021.ccl-1.82/",
+          "extra_urls": {},
+          "accuracy": null,
+          "macro_f1": 67.73,
+          "other_metrics": {
+            "micro_f1": 79.83
+          },
+          "where": "Tables 5 and 7",
+          "protocol_note": "Original 8,606 / 2,000 / 3,000 splits. BERT reads the post together with keyword descriptions of every emotion category. The paper also reports Micro-F1 79.83, which is not listed as accuracy here.",
+          "short_note": "label descriptions as extra input"
+        }
+      ]
+    },
+    "goemotions": {
+      "title": "GoEmotions (English, 7 classes)",
+      "protocol": "official GoEmotions splits mapped to the 6 Ekman emotions + neutral; only rows whose mapped label set has exactly one class are kept: 39,555 / 4,946 / 4,968 rows, single label",
+      "results": [
+        {
+          "id": "sharma_2023_mpnet",
+          "system": "MPNet + cross-entropy (baseline reported by Sharma et al.)",
+          "authors": "Mayukh Sharma, Ilanthenral Kandasamy, W. B. Vasantha Kandasamy",
+          "year": 2023,
+          "venue": "Applied Soft Computing 148, 110896",
+          "source_type": "peer-reviewed journal article",
+          "url": "https://doi.org/10.1016/j.asoc.2023.110896",
+          "extra_urls": {
+            "publisher": "https://www.sciencedirect.com/science/article/pii/S1568494623009146"
+          },
+          "accuracy": 69.6,
+          "macro_f1": 63.6,
+          "other_metrics": {
+            "macro_precision": 63.9,
+            "macro_recall": 63.8
+          },
+          "where": "results on the Ekman taxonomy (row MPNet + cross-entropy)",
+          "protocol_note": "Same split sizes (39,555 / 4,946 / 4,968) and the same per-class test supports as this work. Only this row of the results table could be verified, so it is a same-protocol reference and not necessarily the best number of the paper (whose proposed method is neutrosophic iterative neural clustering).",
+          "short_note": "same split sizes and class supports"
+        },
+        {
+          "id": "wassermair_2023_bert",
+          "system": "BERT base cased (Wassermair)",
+          "authors": "Peter Wassermair",
+          "year": 2023,
+          "venue": "Master's thesis, Johannes Kepler University Linz",
+          "source_type": "master's thesis",
+          "url": "https://epub.jku.at/obvulihs/download/pdf/8620963?originalFilename=true",
+          "extra_urls": {},
+          "accuracy": 70,
+          "macro_f1": 64,
+          "weighted_f1": 70,
+          "where": "Table 4.5 (BERT Large cased: 71 / 64; hybrid representation: 70 / 64)",
+          "protocol_note": "Same 4,968-row test set, but rows with several emotions are kept in training and removed only from dev and test. Scores are reported as whole numbers.",
+          "short_note": "multi-label rows kept in training; whole numbers"
+        }
+      ]
+    },
+    "wrime": {
+      "title": "WRIME ver2 (Japanese, 9 classes)",
+      "protocol": "WRIME ver2 official splits; exact mean of the three reader intensities per emotion; neutral if every mean is below 1.0, otherwise the unique strongest emotion; rows with tied strongest emotions dropped: 28,360 / 2,408 / 2,347 rows, 9 classes",
+      "results": [],
+      "note": "No published result under this 9-class protocol was found. Published WRIME results address intensity estimation (MAE, QWK), 5-level polarity or 8-label multi-label detection, which are different tasks. The closest public 9-class result uses another labelling rule; see wrime_edom18."
+    },
+    "wrime_edom18": {
+      "title": "WRIME ver2 test split under the edom18 9-class relabelling (Japanese, 9 classes)",
+      "protocol": "all 2,500 official WRIME ver2 test rows; labels from the released, rounded 'Avg. Readers' columns of the 8 emotions; all zero -> neutral; otherwise the largest, ties broken by the column order Joy, Sadness, Anticipation, Surprise, Anger, Fear, Disgust, Trust. The rule reproduces the reported test counts (neutral 78, angry 20, trust 9). The models of this work are scored on it without retraining.",
+      "results": [
+        {
+          "id": "edom18_modernbert_ja",
+          "system": "ModernBERT-ja fine-tuned classifier (edom18)",
+          "authors": "edom18",
+          "year": 2026,
+          "venue": "engineering blog article (Zenn, 2026-08-09) with public code",
+          "source_type": "engineering blog article",
+          "url": "https://zenn.dev/edom18/articles/encoder-only-model-ft",
+          "extra_urls": {
+            "code": "https://github.com/edom18/Encoder-model-fine-tuning-demo-with-unity"
+          },
+          "accuracy": null,
+          "macro_f1": 46.5,
+          "weighted_f1": 63.7,
+          "where": "classification report of the article",
+          "protocol_note": "Official ver2 split 30,000 / 2,500 / 2,500; 9 classes from the rounded reader averages, first-column tie breaking, all test rows kept. Self-reported, not peer reviewed, no per-row predictions.",
+          "short_note": "self-reported; trained under this relabelling"
+        }
+      ]
+    }
+  },
+  "official_two_domain_score": {
+    "definition": "(usual Macro-F1 + virus Macro-F1) / 2",
+    "results": [
+      {
+        "id": "smp2020_winner",
+        "system": "SMP2020-EWECT 2020 winner (BERT Forest ensemble)",
+        "usual_macro_f1": 78.56,
+        "virus_macro_f1": 70.78,
+        "score": 74.67,
+        "where": "final leaderboard (0.7467) and the per-domain Macro-F1 of the technical report",
+        "short_note": "rank 1 of the 2020 evaluation"
+      }
+    ]
+  }
+}
