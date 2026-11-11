@@ -1,9 +1,0 @@
-{
-  "run_name": "usual_A_s43",
-  "mode": "post_cot",
-  "use_rationales": false,
-  "label_format": "word",
-  "initial_dev_eval": true,
-  "seed": 43,
-  "data_dir": "data/usual"
-}

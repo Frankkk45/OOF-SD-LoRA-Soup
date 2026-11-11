@@ -1,9 +1,0 @@
-{
-  "run_name": "virus_SDgen2",
-  "mode": "post_cot",
-  "use_rationales": false,
-  "label_format": "word",
-  "initial_dev_eval": false,
-  "label_targets_file": "targets/virus_targets_sd_gen2.json",
-  "data_dir": "data/virus"
-}
